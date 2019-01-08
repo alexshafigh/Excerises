@@ -1,23 +1,26 @@
 package com.Excercise6;
 
+import com.Excercise6.Interfaces.Publisher;
 import com.Excercise6.Interfaces.Subscriber;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GeneralPublisher {
-    List<GeneralSubscriber> subscriberslist = new ArrayList<>();  //Second Implementation
+public class GeneralPublisher implements Publisher {
+    List<Subscriber> subscriberslist = new ArrayList<>();  //Second Implementation
     String name;
 
     public GeneralPublisher(String name) {
         this.name = name;
     }
+
     public void printAllSubscribers() {
-        for (GeneralSubscriber subscriber : subscriberslist) {
+        for (Subscriber subscriber : subscriberslist) {
             System.out.println(subscriber.getName());
         }
     }
-    void addSubscriber(GeneralSubscriber subscriber) {
+    @Override
+    public void addSubscriber(Subscriber subscriber) {
         if (!subscriberslist.contains(subscriber))
             subscriberslist.add(subscriber);
     }
@@ -30,7 +33,8 @@ public class GeneralPublisher {
         subscriberslist.get(subscriberslist.indexOf(subscriber)).setMessage(custom_message);
     }
 
-    public List<GeneralSubscriber> getAllSubscribers() {
+    @Override
+    public List<Subscriber> getAllSubscribers() {
 /*Initial Version
         List<SingletonSubscriber> subscriberList = new ArrayList<>();
         Iterator iterator = subscriberslist.iterator();

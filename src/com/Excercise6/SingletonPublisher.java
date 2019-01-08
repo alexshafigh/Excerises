@@ -1,11 +1,16 @@
 package com.Excercise6;
 
-import java.util.*;
+import com.Excercise6.Interfaces.Publisher;
+import com.Excercise6.Interfaces.Subscriber;
 
-public class SingletonPublisher {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SingletonPublisher implements Publisher {
 //    static Set<SingletonSubscriber> subscriberslist = new HashSet<>(); ///first Implementation
-    static List<SingletonSubscriber> subscriberslist = new ArrayList<>();  //Second Implementation
+    List<Subscriber> subscriberslist = new ArrayList<>();  //Second Implementation
     static SingletonPublisher publisher;
+
 
     private SingletonPublisher() {
     }
@@ -16,23 +21,26 @@ public class SingletonPublisher {
     }
 
     public void printAllSubscribers() {
-        for (SingletonSubscriber subscriber : subscriberslist) {
+        for (Subscriber subscriber : subscriberslist) {
             System.out.println(subscriber.getName());
         }
     }
-    void addSubscriber(SingletonSubscriber subscriber) {
+    @Override
+    public void addSubscriber(Subscriber subscriber) {
         if (!subscriberslist.contains(subscriber))
-            subscriberslist.add(subscriber);
+            subscriberslist.add((SingletonSubscriber) subscriber);
     }
     public void sendMessageToAll() { // send a message to all subscriberslist
-        for (SingletonSubscriber subscriber : subscriberslist) {
+        for (Subscriber subscriber : subscriberslist) {
             subscriber.setMessage(" Hey Dude... You Are Under My Provision");
         }
     }
     public void sendMessage(SingletonSubscriber subscriber , String custom_message) { // send a message to all subscriberslist
         subscriberslist.get(subscriberslist.indexOf(subscriber)).setMessage(custom_message);
     }
-    public List<SingletonSubscriber> getAllSubscribers() {
+
+    @Override
+    public List<Subscriber> getAllSubscribers() {
 /*Initial Version
         List<SingletonSubscriber> subscriberList = new ArrayList<>();
         Iterator iterator = subscriberslist.iterator();

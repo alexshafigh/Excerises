@@ -1,9 +1,5 @@
 import com.Excercise6.GeneralPublisher;
 import com.Excercise6.GeneralSubscriber;
-import com.Excercise6.SingletonPublisher;
-import com.Excercise6.SingletonSubscriber;
-
-import javax.xml.transform.Source;
 
 public class main {
     public static void main(String[] args) {
@@ -36,7 +32,7 @@ public class main {
         GeneralSubscriber gs3 = new GeneralSubscriber("gs3");
 
         gs1.setPublisher(gp1);
-        gs1.setPublisher(gp2);
+//        gs1.setPublisher(gp2);
 
         gs2.setPublisher(gp1);
         gs2.setPublisher(gp2);
