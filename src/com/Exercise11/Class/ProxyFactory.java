@@ -1,36 +1,42 @@
 package com.Exercise11.Class;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import com.Exercise11.Interfaces.I2;
 
-public class ProxyFactory implements InvocationHandler {
+public class ProxyFactory {
 
-    private Service service;
+    private static Service service;
+//    static com.Exercise11.Class.Proxy proxy;
 
-    private ProxyFactory(Service service) {
-        this.service = service;
+//
+//    public static Object createProxyForMe(Class aClass){
+//        return   java.lang.reflect.Proxy.newProxyInstance(aClass.getClass().getClassLoader(),
+//                                                        aClass.getClass().getInterfaces() ,
+//                                                        new IHandler(aClass.getClass())
+//        );
+//    }
+
+    public static I2 createProxyForMe(Service servicez){
+        service = servicez;
+        return  (I2) java.lang.reflect.Proxy.newProxyInstance(servicez.getClass().getClassLoader(),
+                servicez.getClass().getInterfaces(),
+                new IHandler(servicez));
     }
 
-    public static Object createProxy(Service service) {
-        return java.lang.reflect.Proxy.newProxyInstance(service.getClass().getClassLoader(),
-                service.getClass().getInterfaces(),
-                new ProxyFactory(service));
-    }
+//    public static Service createProxy(String s) {
+//        Service service = null;
+//        switch (s){
+//            case "Service":{
+//                service = (Service) proxy.getInstance();
+//            }
+//        }
+//        return service;
+//    }
 
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Object result = null;
-        try {
-//            System.out.println("Mmethod" + method.getName() + "Start Transaction");
-            result = method.invoke(service, args);
-        } catch (InvocationTargetException e) {
-//            System.out.println("Mmethod" + method.getName() + "Rolled Backed");
-        } catch (Exception r) {
-            r.printStackTrace();
-        }
-        return result;
-    }
+//    public static Object createProxy(Service service) {
+//        return java.lang.reflect.Proxy.newProxyInstance(service.getClass().getClassLoader(),
+//                service.getClass().getInterfaces(),
+//                new ProxyFactory(service));
+//    }
 
 }
 

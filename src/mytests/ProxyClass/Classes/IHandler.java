@@ -7,7 +7,7 @@ public class IHandler implements InvocationHandler {
 
     private Target target;
 
-    private IHandler(Target target) {
+    private  IHandler(Target target) {
         this.target = target;
     }
 
@@ -28,4 +28,5 @@ public class IHandler implements InvocationHandler {
         }
         return result;
     }
+
 }
